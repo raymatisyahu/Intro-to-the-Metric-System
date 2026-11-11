@@ -1,0 +1,950 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Mathematics - Sir Galapin | Metric Mastery Quest</title>
+
+<style>
+:root{
+ --navy:#071329;--blue:#123b70;--sky:#38bdf8;--cyan:#67e8f9;
+ --gold:#facc15;--violet:#8b5cf6;--white:#f8fafc;
+ --muted:#a8b8d0;--green:#22c55e;--red:#ef4444;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;color:var(--white);
+ font-family:Arial,Helvetica,sans-serif;
+ background:radial-gradient(circle at top,#1d4270 0,#0a1932 45%,#030817 100%);
+}
+header{
+ padding:16px 5%;display:flex;justify-content:space-between;
+ align-items:center;gap:12px;flex-wrap:wrap;
+ border-bottom:1px solid #315477;background:#071329e8;
+}
+.brand{font-size:clamp(17px,3vw,25px);font-weight:900;color:var(--cyan)}
+.tagline{font-size:12px;color:var(--muted);margin-top:4px}
+.header-right{display:flex;gap:8px;flex-wrap:wrap}
+.hud{background:#132c4c;border:1px solid #315477;border-radius:12px;padding:8px 12px;font-size:13px;color:var(--gold)}
+main{width:min(1000px,94%);margin:24px auto 50px}
+.screen{display:none;animation:appear .35s ease}
+.screen.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.panel{
+ background:linear-gradient(145deg,#142d4d,#0b1b34);
+ border:1px solid #315477;border-radius:20px;
+ padding:clamp(18px,4vw,34px);box-shadow:0 15px 40px #0007;margin-bottom:18px;
+}
+.hero{text-align:center;padding:42px 20px}
+h1{font-size:clamp(28px,5vw,48px);margin:10px 0;color:var(--gold)}
+h2{color:var(--cyan);margin-top:0}
+p{line-height:1.6;color:#d8e5f5}
+.small{font-size:13px;color:var(--muted)}
+input,select{
+ width:100%;padding:14px;border-radius:10px;border:1px solid #52759a;
+ background:#071329;color:white;font-size:17px;margin:7px 0 15px;
+}
+label{display:block;font-weight:bold;color:#d8e5f5;margin-top:12px}
+button{
+ border:0;border-radius:11px;padding:13px 20px;font-weight:800;
+ font-size:15px;cursor:pointer;transition:.2s;
+}
+button:hover{transform:translateY(-2px);filter:brightness(1.12)}
+button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.primary{background:linear-gradient(90deg,#0284c7,#38bdf8);color:#031426}
+.gold{background:linear-gradient(90deg,#eab308,#fde047);color:#281900}
+.secondary{background:#24466c;color:white;border:1px solid #52759a}
+.danger{background:#991b1b;color:white}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.actions button{flex:1;min-width:140px}
+.center{text-align:center}
+.big-icon{font-size:65px;margin:10px}
+.progress{height:12px;background:#071329;border-radius:20px;overflow:hidden;margin:12px 0}
+.progress div{height:100%;width:0;background:linear-gradient(90deg,#0ea5e9,#a78bfa);transition:.3s}
+.video-wrap{
+ position:relative;width:100%;aspect-ratio:16/9;background:#000;
+ border:2px solid #38bdf8;border-radius:14px;overflow:hidden;
+}
+.video-wrap iframe{width:100%;height:100%;border:0}
+.question{
+ background:#071a32;border:1px solid #315477;border-radius:15px;
+ padding:22px;margin:20px 0;font-size:clamp(19px,3vw,25px);
+ line-height:1.5;font-weight:700;
+}
+.answer-input{font-size:22px;text-align:center}
+.feedback{font-size:18px;font-weight:bold;min-height:28px;margin:12px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.stat{background:#071a32;border:1px solid #315477;border-radius:14px;padding:18px;text-align:center}
+.stat strong{display:block;font-size:30px;color:var(--gold);margin-top:8px}
+table{width:100%;border-collapse:collapse;margin-top:15px;font-size:14px}
+th,td{border:1px solid #315477;padding:10px;text-align:left}
+th{background:#123b70;color:var(--cyan)}
+td{background:#0b1b34}
+.table-wrap{overflow-x:auto}
+.medal{font-size:70px}
+.warning{color:#fbbf24}
+.hidden{display:none!important}
+footer{text-align:center;color:#829ab8;font-size:12px;padding:20px}
+@media(max-width:600px){
+ header{align-items:flex-start}
+ .actions{flex-direction:column}
+ .actions button{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div>
+  <div class="brand">⚔ MATHEMATICS – SIR GALAPIN</div>
+  <div class="tagline">WATCH • LEARN • PRACTICE • ACHIEVE</div>
+ </div>
+ <div class="header-right">
+  <div class="hud">⭐ XP: <span id="hudXP">0</span></div>
+  <div class="hud">🪙 Coins: <span id="hudCoins">0</span></div>
+ </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="screen active">
+ <div class="panel hero">
+  <div class="big-icon">🛡️</div>
+  <h1>METRIC MASTERY QUEST</h1>
+  <h2>THE SEVEN UNITS OF LENGTH</h2>
+  <p>
+   Welcome, young mathematician! Watch the lesson if you want,
+   practice your skills, and defeat the final assessment boss!
+  </p>
+
+  <div class="stat-grid">
+   <div class="stat">📺<br>Lesson Video<strong>Optional</strong></div>
+   <div class="stat">⚔️<br>Practice Drill<strong>5 Items</strong></div>
+   <div class="stat">👑<br>Boss Battle<strong>10 Items</strong></div>
+  </div>
+
+  <div class="actions">
+   <button class="gold" onclick="go('registration')">START QUEST</button>
+   <button class="secondary" onclick="teacherLogin()">TEACHER DASHBOARD</button>
+  </div>
+ </div>
+</section>
+
+<!-- REGISTRATION -->
+<section id="registration" class="screen">
+ <div class="panel">
+  <h2>🧙 STUDENT REGISTRATION</h2>
+  <p>Register before starting the learning adventure.</p>
+
+  <label>Complete Name</label>
+  <input id="studentName" placeholder="Enter your complete name">
+
+  <label>Grade Level</label>
+  <input value="Grade 6" disabled>
+
+  <label>Section</label>
+  <select id="studentSection">
+   <option value="">Select your section</option>
+   <option>Grade 6 - Narvaez</option>
+   <option>Grade 6 - Dianga</option>
+   <option>Grade 6 - Corrales</option>
+  </select>
+
+  <div class="actions">
+   <button class="secondary" onclick="go('home')">BACK</button>
+   <button class="primary" onclick="registerStudent()">CONTINUE</button>
+  </div>
+ </div>
+</section>
+
+<!-- VIDEO -->
+<section id="videoScreen" class="screen">
+ <div class="panel">
+  <h2>📺 MISSION 1: WATCH THE LESSON</h2>
+  <p>You may watch the lesson video before starting the drill.</p>
+
+  <div class="video-wrap">
+   <iframe
+    id="ytplayer"
+    title="Metric Length Lesson"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+   </iframe>
+  </div>
+
+  <div class="progress"><div id="videoProgress"></div></div>
+  <p class="center" id="videoStatus">Loading lesson video...</p>
+  <p class="small warning">
+   Watching the video is optional. You may proceed to the drill anytime.
+  </p>
+
+  <div class="actions">
+   <button class="secondary" onclick="go('registration')">BACK</button>
+   <button class="gold" id="videoContinue" onclick="enterDrill()">
+    ⚔️ CONTINUE TO DRILL
+   </button>
+  </div>
+ </div>
+</section>
+
+<!-- DRILL -->
+<section id="drillScreen" class="screen">
+ <div class="panel">
+  <h2>⚔️ MISSION 2: PRACTICE DRILL</h2>
+  <p>Answer five randomized questions. Type your answer in the box.</p>
+
+  <div class="stat-grid">
+   <div class="stat">Question<strong id="drillNumber">1 / 5</strong></div>
+   <div class="stat">Correct<strong id="drillScore">0</strong></div>
+   <div class="stat">Lives ❤️<strong id="drillLives">3</strong></div>
+  </div>
+
+  <div class="progress"><div id="drillProgress"></div></div>
+  <div class="question" id="drillQuestion"></div>
+
+  <label>Your Answer</label>
+  <input id="drillAnswer" class="answer-input" autocomplete="off" placeholder="Type your answer">
+
+  <div class="feedback" id="drillFeedback"></div>
+
+  <div class="actions">
+   <button class="primary" id="drillSubmit" onclick="checkDrill()">SUBMIT ANSWER</button>
+   <button class="secondary hidden" id="drillNext" onclick="nextDrill()">NEXT QUESTION</button>
+  </div>
+ </div>
+</section>
+
+<!-- ASSESSMENT -->
+<section id="assessmentScreen" class="screen">
+ <div class="panel">
+  <h2>👹 MISSION 3: FINAL BOSS BATTLE</h2>
+  <p>Answer all ten questions. Each correct answer earns points and rewards.</p>
+
+  <div class="stat-grid">
+   <div class="stat">Question<strong id="testNumber">1 / 10</strong></div>
+   <div class="stat">Score<strong id="testScore">0</strong></div>
+   <div class="stat">Reward<strong>XP +20</strong></div>
+  </div>
+
+  <div class="progress"><div id="testProgress"></div></div>
+  <div class="question" id="testQuestion"></div>
+
+  <label>Your Answer</label>
+  <input id="testAnswer" class="answer-input" autocomplete="off" placeholder="Type your answer">
+
+  <div class="feedback" id="testFeedback"></div>
+
+  <div class="actions">
+   <button class="gold" id="testSubmit" onclick="checkTest()">SUBMIT ANSWER</button>
+   <button class="secondary hidden" id="testNext" onclick="nextTest()">NEXT QUESTION</button>
+  </div>
+ </div>
+</section>
+
+<!-- RESULTS -->
+<section id="resultScreen" class="screen">
+ <div class="panel center">
+  <div class="big-icon">🏆</div>
+  <h1>QUEST COMPLETED!</h1>
+  <div class="medal" id="medalIcon">🥉</div>
+  <h2 id="medalTitle">BRONZE MEDAL</h2>
+  <p id="resultStudent"></p>
+
+  <div class="stat-grid">
+   <div class="stat">Drill Score<strong id="resultDrill">0 / 5</strong></div>
+   <div class="stat">Assessment<strong id="resultTest">0 / 10</strong></div>
+   <div class="stat">Total Correct<strong id="resultTotal">0 / 15</strong></div>
+   <div class="stat">Experience Points<strong id="resultXP">0</strong></div>
+   <div class="stat">Coins Earned<strong id="resultCoins">0</strong></div>
+  </div>
+
+  <p id="resultMessage"></p>
+
+  <div class="actions">
+   <button class="gold" onclick="showAnswerKey()">VIEW ANSWER KEY</button>
+   <button class="primary" onclick="go('home')">RETURN HOME</button>
+  </div>
+
+  <div id="answerKey" class="hidden">
+   <h2>📖 ANSWER KEY AND REVIEW</h2>
+   <div class="table-wrap"><table id="answerTable"></table></div>
+  </div>
+ </div>
+</section>
+
+<!-- TEACHER DASHBOARD -->
+<section id="teacherScreen" class="screen">
+ <div class="panel">
+  <h2>📊 TEACHER DASHBOARD</h2>
+  <p>Student results saved in this browser.</p>
+
+  <label>Filter by Section</label>
+  <select id="sectionFilter" onchange="renderRecords()">
+   <option value="">All Sections</option>
+   <option>Grade 6 - Narvaez</option>
+   <option>Grade 6 - Dianga</option>
+   <option>Grade 6 - Corrales</option>
+  </select>
+
+  <div class="stat-grid">
+   <div class="stat">Total Records<strong id="recordCount">0</strong></div>
+   <div class="stat">Average Assessment<strong id="recordAverage">0</strong></div>
+  </div>
+
+  <div class="actions">
+   <button class="primary" onclick="exportCSV()">DOWNLOAD EXCEL/CSV</button>
+   <button class="danger" onclick="clearRecords()">CLEAR ALL RECORDS</button>
+   <button class="secondary" onclick="go('home')">BACK HOME</button>
+  </div>
+
+  <div class="table-wrap"><table id="recordsTable"></table></div>
+
+  <p class="small warning">
+   Records are stored locally on this device and browser.
+   They do not automatically combine results from other students' devices.
+  </p>
+ </div>
+</section>
+
+</main>
+
+<footer>MATHEMATICS – SIR GALAPIN | METRIC MASTERY QUEST</footer>
+
+<script>
+/* =========================================
+   NAVIGATION AND STUDENT DATA
+========================================= */
+const $ = id => document.getElementById(id);
+
+function go(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ $(id).classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+let student={name:'',section:'',grade:'Grade 6'};
+let xp=0,coins=0,drillScore=0,testScore=0,lives=3;
+let drillItems=[],testItems=[],drillIndex=0,testIndex=0;
+let drillHistory=[],testHistory=[];
+let videoDone=false;
+
+function updateHUD(){
+ $('hudXP').textContent=xp;
+ $('hudCoins').textContent=coins;
+}
+
+function registerStudent(){
+ const name=$('studentName').value.trim();
+ const section=$('studentSection').value;
+
+ if(!name||!section){
+  alert('Please enter your complete name and select your section.');
+  return;
+ }
+
+ student={name,section,grade:'Grade 6'};
+ xp=0;coins=0;drillScore=0;testScore=0;lives=3;
+ drillHistory=[];testHistory=[];videoDone=false;
+
+ updateHUD();
+ go('videoScreen');
+ initializeVideo();
+}
+
+/* =========================================
+   YOUTUBE VIDEO
+   Optional video - not required to continue
+========================================= */
+let player=null;
+let playerReady=false;
+let maxVideoTime=0;
+let videoTimer=null;
+let seekingBack=false;
+let videoSetupStarted=false;
+
+const VIDEO_ID='ZNX-a-5jGeM';
+
+function initializeVideo(){
+ if(videoTimer){
+  clearInterval(videoTimer);
+  videoTimer=null;
+ }
+
+ player=null;
+ playerReady=false;
+ maxVideoTime=0;
+ videoDone=false;
+ videoSetupStarted=false;
+
+ $('videoProgress').style.width='0%';
+ $('videoStatus').textContent='Loading lesson video...';
+
+ const iframe=$('ytplayer');
+ const params=new URLSearchParams({
+  enablejsapi:'1',
+  playsinline:'1',
+  rel:'0',
+  origin:location.origin
+ });
+
+ iframe.setAttribute('referrerpolicy','strict-origin-when-cross-origin');
+ iframe.src='https://www.youtube.com/embed/'+VIDEO_ID+'?'+params.toString();
+
+ loadYouTubeAPI();
+}
+
+function loadYouTubeAPI(){
+ if(window.YT&&window.YT.Player){
+  createPlayer();
+  return;
+ }
+
+ window.onYouTubeIframeAPIReady=function(){
+  createPlayer();
+ };
+
+ if(!document.getElementById('youtubeAPI')){
+  const script=document.createElement('script');
+  script.id='youtubeAPI';
+  script.src='https://www.youtube.com/iframe_api';
+
+  script.onerror=function(){
+   $('videoStatus').textContent=
+    'Unable to load the YouTube API. You can still continue to the drill below.';
+  };
+
+  document.head.appendChild(script);
+ }
+}
+
+function createPlayer(){
+ if(videoSetupStarted||!window.YT||!window.YT.Player)return;
+
+ videoSetupStarted=true;
+
+ try{
+  player=new YT.Player('ytplayer',{
+   events:{
+    onReady:function(){
+     playerReady=true;
+
+     try{
+      player.getIframe().setAttribute(
+       'referrerpolicy','strict-origin-when-cross-origin'
+      );
+     }catch(e){}
+
+     $('videoStatus').textContent=
+      'Press Play to begin watching. Or click Continue to Drill.';
+
+     if(videoTimer)clearInterval(videoTimer);
+     videoTimer=setInterval(checkVideoProgress,500);
+    },
+
+    onStateChange:function(event){
+     if(event.data===YT.PlayerState.ENDED){
+      finishVideo();
+     }
+    },
+
+    onError:function(event){
+     $('videoStatus').textContent=
+      'YouTube playback error ('+event.data+'). You may still continue to the drill.';
+     console.warn('YouTube player error:',event.data);
+    }
+   }
+  });
+ }catch(error){
+  videoSetupStarted=false;
+  $('videoStatus').textContent=
+   'The video player could not initialize. You may still continue to the drill.';
+  console.error(error);
+ }
+}
+
+function checkVideoProgress(){
+ if(!playerReady||!player||videoDone)return;
+
+ try{
+  const current=player.getCurrentTime()||0;
+  const duration=player.getDuration()||0;
+  if(!duration)return;
+
+  if(current>maxVideoTime+2&&!seekingBack){
+   seekingBack=true;
+   player.seekTo(maxVideoTime,true);
+   setTimeout(()=>seekingBack=false,700);
+   return;
+  }
+
+  if(current<=maxVideoTime+2){
+   maxVideoTime=Math.max(maxVideoTime,current);
+  }
+
+  const percent=Math.min(100,(maxVideoTime/duration)*100);
+  $('videoProgress').style.width=percent+'%';
+  $('videoStatus').textContent=
+   'Lesson progress: '+Math.floor(percent)+'%';
+
+  if(percent>=99.5)finishVideo();
+ }catch(error){
+  console.warn(error);
+ }
+}
+
+function finishVideo(){
+ if(videoDone)return;
+
+ videoDone=true;
+ $('videoProgress').style.width='100%';
+ $('videoStatus').textContent='Lesson completed! +100 XP and +50 coins.';
+
+ xp+=100;
+ coins+=50;
+ updateHUD();
+
+ if(videoTimer){
+  clearInterval(videoTimer);
+  videoTimer=null;
+ }
+}
+
+/* ALWAYS ALLOW THE LEARNER TO CONTINUE */
+function enterDrill(){
+ startDrill();
+}
+
+/* =========================================
+   QUESTION BANK: EXACTLY 100 ITEMS
+========================================= */
+const units=[
+ {s:'km',name:'kilometer',m:1000},
+ {s:'hm',name:'hectometer',m:100},
+ {s:'dam',name:'decameter',m:10},
+ {s:'m',name:'meter',m:1},
+ {s:'dm',name:'decimeter',m:0.1},
+ {s:'cm',name:'centimeter',m:0.01},
+ {s:'mm',name:'millimeter',m:0.001}
+];
+
+const BANK=[];
+
+function addQuestion(q,a,type='number'){
+ BANK.push({id:BANK.length+1,q:q,a:String(a),type:type});
+}
+
+// 1–10: Identification
+[
+ ['What is the symbol for kilometer?','km','text'],
+ ['What is the symbol for hectometer?','hm','text'],
+ ['What is the symbol for decameter?','dam','text'],
+ ['What is the symbol for meter?','m','text'],
+ ['What is the symbol for decimeter?','dm','text'],
+ ['What is the symbol for centimeter?','cm','text'],
+ ['What is the symbol for millimeter?','mm','text'],
+ ['What is the largest metric unit in this lesson?','km','text'],
+ ['What is the smallest metric unit in this lesson?','mm','text'],
+ ['What is the basic unit of length?','m','text']
+].forEach(x=>addQuestion(x[0],x[1],x[2]));
+
+// 11–20: Order and relationships
+[
+ ['Write the units from largest to smallest, separated by commas.','km,hm,dam,m,dm,cm,mm','text'],
+ ['Write the units from smallest to largest, separated by commas.','mm,cm,dm,m,dam,hm,km','text'],
+ ['How many steps are there from km to m?','3'],
+ ['How many steps are there from m to mm?','3'],
+ ['How many steps are there from cm to m?','2'],
+ ['How many meters are in 1 kilometer?','1000'],
+ ['How many centimeters are in 1 meter?','100'],
+ ['How many millimeters are in 1 meter?','1000'],
+ ['How many decimeters are in 1 meter?','10'],
+ ['How many meters are in 1 hectometer?','100']
+].forEach(x=>addQuestion(x[0],x[1],x[2]||'number'));
+
+// 21–100: Conversion questions
+const pairs=[
+ [0,3],[1,3],[2,3],[3,0],
+ [3,1],[3,2],[3,4],[3,5],
+ [3,6],[4,3],[5,3],[6,3],
+ [0,5],[5,0],[1,6],[6,1]
+];
+
+const values=[2,5,12,25,0.5];
+
+for(let round=0;round<5;round++){
+ for(let j=0;j<pairs.length;j++){
+  const from=units[pairs[j][0]];
+  const to=units[pairs[j][1]];
+  const value=values[(j+round)%values.length];
+  const answer=Number((value*from.m/to.m).toFixed(6));
+
+  addQuestion(
+   'Convert '+value+' '+from.s+' to '+to.s+'.',
+   answer
+  );
+ }
+}
+
+console.log('Question bank total:',BANK.length);
+
+/* =========================================
+   RANDOMIZATION AND ANSWER CHECKING
+========================================= */
+function shuffle(array){
+ const a=[...array];
+
+ for(let i=a.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+
+function pickQuestions(count,exclude=[]){
+ return shuffle(BANK.filter(q=>!exclude.includes(q.id))).slice(0,count);
+}
+
+function normalizeText(value){
+ return String(value).trim().toLowerCase()
+  .replace(/\s+/g,'').replace(/,/g,'');
+}
+
+function isCorrect(item,answer){
+ if(item.type==='text'){
+  return normalizeText(answer)===normalizeText(item.a);
+ }
+
+ const entered=Number(String(answer).replace(/,/g,'').trim());
+ const correct=Number(item.a);
+
+ return answer.trim()!==''&&Number.isFinite(entered)&&
+  Math.abs(entered-correct)<0.00001;
+}
+
+/* =========================================
+   FIVE-ITEM DRILL
+========================================= */
+function startDrill(){
+ drillItems=pickQuestions(5);
+ drillIndex=0;
+ drillScore=0;
+ lives=3;
+ drillHistory=[];
+
+ go('drillScreen');
+ showDrillQuestion();
+}
+
+function showDrillQuestion(){
+ const item=drillItems[drillIndex];
+
+ $('drillNumber').textContent=(drillIndex+1)+' / 5';
+ $('drillScore').textContent=drillScore;
+ $('drillLives').textContent=lives;
+ $('drillProgress').style.width=(drillIndex/5*100)+'%';
+ $('drillQuestion').textContent=item.q;
+ $('drillAnswer').value='';
+ $('drillFeedback').textContent='';
+ $('drillSubmit').classList.remove('hidden');
+ $('drillNext').classList.add('hidden');
+ $('drillAnswer').disabled=false;
+ $('drillAnswer').focus();
+}
+
+function checkDrill(){
+ const item=drillItems[drillIndex];
+ const answer=$('drillAnswer').value.trim();
+
+ if(!answer){
+  alert('Please type your answer.');
+  return;
+ }
+
+ const correct=isCorrect(item,answer);
+
+ drillHistory.push({item:item,answer:answer,correct:correct});
+
+ $('drillAnswer').disabled=true;
+ $('drillSubmit').classList.add('hidden');
+ $('drillNext').classList.remove('hidden');
+
+ if(correct){
+  drillScore++;
+  xp+=10;
+  coins+=5;
+  $('drillFeedback').textContent='✅ CORRECT! +10 XP +5 coins';
+  $('drillFeedback').style.color='#4ade80';
+ }else{
+  lives--;
+  $('drillFeedback').textContent='❌ Incorrect. Correct answer: '+item.a;
+  $('drillFeedback').style.color='#f87171';
+ }
+
+ $('drillScore').textContent=drillScore;
+ $('drillLives').textContent=lives;
+ $('drillProgress').style.width=((drillIndex+1)/5*100)+'%';
+ $('drillNext').textContent=drillIndex===4?'FINISH DRILL':'NEXT QUESTION';
+
+ updateHUD();
+}
+
+function nextDrill(){
+ if(drillIndex<4){
+  drillIndex++;
+  showDrillQuestion();
+ }else{
+  startAssessment();
+ }
+}
+
+/* =========================================
+   TEN-ITEM ASSESSMENT
+========================================= */
+function startAssessment(){
+ const used=drillItems.map(q=>q.id);
+ testItems=pickQuestions(10,used);
+ testIndex=0;
+ testScore=0;
+ testHistory=[];
+
+ go('assessmentScreen');
+ showTestQuestion();
+}
+
+function showTestQuestion(){
+ const item=testItems[testIndex];
+
+ $('testNumber').textContent=(testIndex+1)+' / 10';
+ $('testScore').textContent=testScore;
+ $('testProgress').style.width=(testIndex/10*100)+'%';
+ $('testQuestion').textContent=item.q;
+ $('testAnswer').value='';
+ $('testFeedback').textContent='';
+ $('testAnswer').disabled=false;
+ $('testSubmit').classList.remove('hidden');
+ $('testNext').classList.add('hidden');
+ $('testNext').textContent=testIndex===9?'VIEW RESULTS':'NEXT QUESTION';
+ $('testAnswer').focus();
+}
+
+function checkTest(){
+ const item=testItems[testIndex];
+ const answer=$('testAnswer').value.trim();
+
+ if(!answer){
+  alert('Please type your answer.');
+  return;
+ }
+
+ const correct=isCorrect(item,answer);
+
+ testHistory.push({item:item,answer:answer,correct:correct});
+
+ $('testAnswer').disabled=true;
+ $('testSubmit').classList.add('hidden');
+ $('testNext').classList.remove('hidden');
+
+ if(correct){
+  testScore++;
+  xp+=20;
+  coins+=10;
+  $('testFeedback').textContent='✅ CORRECT! +20 XP +10 coins';
+  $('testFeedback').style.color='#4ade80';
+ }else{
+  $('testFeedback').textContent='❌ Answer recorded. Keep going!';
+  $('testFeedback').style.color='#f87171';
+ }
+
+ $('testScore').textContent=testScore;
+ $('testProgress').style.width=((testIndex+1)/10*100)+'%';
+ updateHUD();
+}
+
+function nextTest(){
+ if(testIndex<9){
+  testIndex++;
+  showTestQuestion();
+ }else{
+  finishQuest();
+ }
+}
+
+/* =========================================
+   RESULTS AND ANSWER KEY
+========================================= */
+function finishQuest(){
+ go('resultScreen');
+
+ const total=drillScore+testScore;
+ let medal='🥉';
+ let title='BRONZE MEDAL';
+
+ if(testScore>=9){
+  medal='🥇';
+  title='GOLD MEDAL';
+ }else if(testScore>=7){
+  medal='🥈';
+  title='SILVER MEDAL';
+ }
+
+ $('medalIcon').textContent=medal;
+ $('medalTitle').textContent=title;
+ $('resultStudent').textContent=student.name+' | '+student.section;
+ $('resultDrill').textContent=drillScore+' / 5';
+ $('resultTest').textContent=testScore+' / 10';
+ $('resultTotal').textContent=total+' / 15';
+ $('resultXP').textContent=xp;
+ $('resultCoins').textContent=coins;
+
+ $('resultMessage').textContent=
+  total>=13?'Outstanding work! You are a Metric Master!':
+  total>=9?'Great effort! Keep practicing your conversions!':
+  'Keep learning and practicing. You can improve!';
+
+ $('answerKey').classList.add('hidden');
+ saveRecord(total);
+}
+
+function showAnswerKey(){
+ $('answerKey').classList.remove('hidden');
+
+ let html=
+  '<tr><th>No.</th><th>Question</th><th>Your Answer</th><th>Correct Answer</th><th>Result</th></tr>';
+
+ [...drillHistory,...testHistory].forEach((r,i)=>{
+  html+='<tr><td>'+(i+1)+'</td><td>'+escapeHTML(r.item.q)+'</td><td>'+
+   escapeHTML(r.answer)+'</td><td>'+escapeHTML(r.item.a)+'</td><td>'+
+   (r.correct?'Correct':'Incorrect')+'</td></tr>';
+ });
+
+ $('answerTable').innerHTML=html;
+}
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ }[c]));
+}
+
+/* =========================================
+   TEACHER DASHBOARD
+========================================= */
+const STORAGE_KEY='sirGalapinMetricQuestRecords';
+
+function getRecords(){
+ try{
+  return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+ }catch(e){
+  return [];
+ }
+}
+
+function saveRecord(total){
+ const records=getRecords();
+
+ records.push({
+  name:student.name,
+  grade:student.grade,
+  section:student.section,
+  drill:drillScore,
+  test:testScore,
+  total:total,
+  xp:xp,
+  coins:coins,
+  date:new Date().toLocaleString()
+ });
+
+ localStorage.setItem(STORAGE_KEY,JSON.stringify(records));
+}
+
+function teacherLogin(){
+ const pin=prompt('Enter Teacher PIN:');
+ if(pin===null)return;
+
+ if(pin!=='2468'){
+  alert('Incorrect PIN.');
+  return;
+ }
+
+ renderRecords();
+ go('teacherScreen');
+}
+
+function renderRecords(){
+ const filter=$('sectionFilter').value;
+ const records=getRecords().filter(r=>!filter||r.section===filter);
+
+ $('recordCount').textContent=records.length;
+
+ const average=records.length?
+  records.reduce((sum,r)=>sum+Number(r.test||0),0)/records.length:0;
+
+ $('recordAverage').textContent=average.toFixed(2)+' / 10';
+
+ let html=
+  '<tr><th>No.</th><th>Student</th><th>Grade</th><th>Section</th><th>Drill</th><th>Assessment</th><th>Total</th><th>Date</th></tr>';
+
+ records.forEach((r,i)=>{
+  html+='<tr><td>'+(i+1)+'</td><td>'+escapeHTML(r.name)+'</td><td>'+
+   escapeHTML(r.grade)+'</td><td>'+escapeHTML(r.section)+'</td><td>'+
+   r.drill+'/5</td><td>'+r.test+'/10</td><td>'+r.total+'/15</td><td>'+
+   escapeHTML(r.date)+'</td></tr>';
+ });
+
+ $('recordsTable').innerHTML=html;
+}
+
+function exportCSV(){
+ const filter=$('sectionFilter').value;
+ const records=getRecords().filter(r=>!filter||r.section===filter);
+
+ if(!records.length){
+  alert('No records to export.');
+  return;
+ }
+
+ const headers=[
+  'Student Name','Grade','Section','Drill Score',
+  'Assessment Score','Total Score','XP','Coins','Date'
+ ];
+
+ const rows=records.map(r=>[
+  r.name,r.grade,r.section,r.drill,r.test,r.total,r.xp,r.coins,r.date
+ ]);
+
+ const csv=[headers,...rows].map(row=>
+  row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')
+ ).join('\r\n');
+
+ const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+
+ a.href=url;
+ a.download='Metric_Mastery_Quest_Results.csv';
+ a.click();
+
+ URL.revokeObjectURL(url);
+}
+
+function clearRecords(){
+ if(!confirm('Delete all saved student records on this browser?'))return;
+ localStorage.removeItem(STORAGE_KEY);
+ renderRecords();
+}
+
+/* INITIALIZE */
+updateHUD();
+
+if(BANK.length!==100){
+ console.error('Question bank error. Expected 100, found '+BANK.length);
+}
+</script>
+
+</body>
+</html>
